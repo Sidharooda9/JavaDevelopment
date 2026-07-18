@@ -1,15 +1,26 @@
 package com.example.accounts.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.accounts.constants.AccountConstants;
+import com.example.accounts.dto.CustomerDto;
+import com.example.accounts.dto.ResponseDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.print.attribute.standard.Media;
+import java.awt.*;
 
 @RestController
+@RequestMapping(path = "/api" , produces = (MediaType.APPLICATION_JSON_VALUE))
 public class AccountController {
 
-    @GetMapping("sayhello")
-    public String sayHello(){
-        System.out.println("siddu");
-        System.out.println("Ok");
-        return "Hello World";
+    @PostMapping("/create")
+    public ResponseEntity<ResponseDto> createAccount(@RequestBody CustomerDto customerDto){
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED).body(new ResponseDto(AccountConstants.STATUS_201,AccountConstants.MESSAGE_201));
     }
+
+
 }
