@@ -7,19 +7,20 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter@Setter@ToString
 @MappedSuperclass
 public class Baseentity {
     @Column(updatable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(updatable = false)
     private String createdBy;
 
 
     @Column(updatable = false)
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column(updatable = false)
     private String updatedBy;
