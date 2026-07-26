@@ -4,4 +4,5 @@ import com.example.accounts.dto.CustomerDto;
 
 public interface IAccountservice {
     public void createAccount(CustomerDto customerDto);
+    public CustomerDto fetchAccount(String mobileNum);
 }
