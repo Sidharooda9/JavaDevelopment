@@ -28,10 +28,10 @@ jobs:
       - name: Build and test application
         run: ./mvnw -B clean verify
 
-      - name: Upload WAR artifact
+      - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: CICD-WAR
-          path: target/*.war
+          name: CICD-JAR
+          path: target/*.jar
           retention-days: 7
           if-no-files-found: error
