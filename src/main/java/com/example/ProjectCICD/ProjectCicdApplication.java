@@ -1,13 +1,13 @@
-package com.example.accounts;
+package com.example.ProjectCICD;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AccountsApplication {
+public class ProjectCicdApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AccountsApplication.class, args);
+		SpringApplication.run(ProjectCicdApplication.class, args);
 	}
 
 }
