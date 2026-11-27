@@ -45,11 +45,11 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up Java 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
+      - name: Verify installed Java
+        run: java -version
+
+      - name: Verify Maven
+        run: .\mvnw.cmd -version
 
       - name: Build Docker image using Jib
         run: .\mvnw.cmd clean compile jib:dockerBuild
