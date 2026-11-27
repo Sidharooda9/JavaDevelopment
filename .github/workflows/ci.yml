@@ -37,16 +37,33 @@ jobs:
           if-no-files-found: error
 
   deploy:
-    name: Verify Local Docker Connection
+    name: Deploy Docker Container
     needs: build
-    runs-on: [self-hosted, Windows, X64]
+    runs-on: [ self-hosted, Windows, X64 ]
 
     steps:
-      - name: Check Docker version
-        run: docker --version
+      - name: Checkout source code
+        uses: actions/checkout@v4
 
-      - name: Check Docker images
-        run: docker images
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
 
-      - name: Check running containers
+      - name: Build Docker image using Jib
+        run: .\mvnw.cmd clean compile jib:dockerBuild
+
+      - name: Remove existing container
+        shell: powershell
+        run: |
+          $container = docker ps -aq --filter "name=^/cicd-container$"
+          if ($container) {
+              docker rm -f cicd-container
+          }
+
+      - name: Create and start container
+        run: docker run -d --name cicd-container -p 127.0.0.1:8080:8080 cicd-app:1.0
+
+      - name: Verify running container
         run: docker ps
