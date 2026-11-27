@@ -35,3 +35,18 @@ jobs:
           path: target/*.jar
           retention-days: 7
           if-no-files-found: error
+
+  deploy:
+    name: Verify Local Docker Connection
+    needs: build
+    runs-on: [self-hosted, Windows, X64]
+
+    steps:
+      - name: Check Docker version
+        run: docker --version
+
+      - name: Check Docker images
+        run: docker images
+
+      - name: Check running containers
+        run: docker ps
